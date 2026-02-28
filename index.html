@@ -7,13 +7,13 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <nav id="navbar">
         <div class="nav-container">
-            <div class="logo">&gt;_ ALBLOOSHI</div>
+            <a href="#hero" class="logo">&gt;_ ALBLOOSHI</a>
             <ul class="nav-links">
                 <li><a href="#hero">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -30,7 +30,7 @@
             <h1>Ahmed Alblooshi</h1>
             <h2>Cybersecurity Student | Passionate Learner</h2>
             <p class="summary">
-                I am a dedicated cybersecurity student with a broad interest in securing digital environments. I love exploring various aspects of the field, continuously learning new technologies, and building practical projects to enhance my skills.
+                I am a dedicated cybersecurity student with a broad interest in securing digital environments. I love exploring various aspects of the field, continuously learning new technologies, and building practical projects to enhance my technical foundation.
             </p>
             <div class="btn-group">
                 <a href="#projects" class="btn btn-primary">View Projects</a>
@@ -157,21 +157,11 @@
     </section>
 
     <footer>
-        <p>&copy; 2026 Ahmed Alblooshi. All rights reserved. | UAE</p>
+        <p>&copy; 2026 Ahmed Alblooshi. All rights reserved. | System Offline.</p>
     </footer>
 
     <script>
-        // Smooth Scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Intersection Observer for subtle fade-in animations
+        // Crisp, technical fade-in without bouncy floating effects
         const observerOptions = {
             root: null,
             rootMargin: '0px',
