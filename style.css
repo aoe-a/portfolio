@@ -1,13 +1,13 @@
 /* --- Variables & Reset --- */
 :root {
-    --bg-main: #0b0f19;
-    --bg-alt: #111827;
-    --card-bg: #1f2937;
-    --text-main: #e2e8f0;
-    --text-muted: #9ca3af;
-    --accent-color: #38bdf8; /* Cyber Blue */
-    --accent-hover: #0284c7;
-    --border-color: #374151;
+    --bg-main: #050505; /* Deep, almost pure black */
+    --bg-alt: #0d0d0d;  /* Slight contrast for alternate sections */
+    --card-bg: #0d0d0d;
+    --text-main: #d4d4d4; /* IDE-style light gray */
+    --text-muted: #888888;
+    --accent-color: #00ffcc; /* Tech/Cyber Mint-Cyan */
+    --accent-hover: #00b38f;
+    --border-color: #222222; /* Sharp, visible borders */
     
     --font-main: 'Inter', sans-serif;
     --font-mono: 'Fira Code', monospace;
@@ -19,8 +19,10 @@
     box-sizing: border-box;
 }
 
+/* Native smooth scrolling + offset for the fixed navbar */
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 80px; 
 }
 
 body {
@@ -49,34 +51,36 @@ body {
 }
 
 h1, h2, h3 {
-    color: #ffffff;
-    font-weight: 700;
+    color: #ffffff; /* Stark white for headings */
+    font-weight: 600;
 }
 
 .section-title {
-    font-size: 2.2rem;
+    font-size: 2rem;
     margin-bottom: 3rem;
     position: relative;
     display: inline-block;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
+/* Minimalist terminal-like underline */
 .section-title::after {
-    content: '';
+    content: '_';
     position: absolute;
-    bottom: -10px;
-    left: 0;
-    width: 60px;
-    height: 3px;
-    background-color: var(--accent-color);
+    bottom: -5px;
+    right: -25px;
+    color: var(--accent-color);
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
 }
 
 .text-center {
     text-align: center;
-}
-
-.text-center .section-title::after {
-    left: 50%;
-    transform: translateX(-50%);
 }
 
 .mono-accent {
@@ -92,11 +96,11 @@ h1, h2, h3 {
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: rgba(11, 15, 25, 0.95);
-    backdrop-filter: blur(10px);
+    background-color: rgba(5, 5, 5, 0.95); /* Deep dark semi-transparent */
+    backdrop-filter: blur(5px);
     border-bottom: 1px solid var(--border-color);
     z-index: 1000;
-    padding: 1rem 0;
+    padding: 1.2rem 0;
 }
 
 .nav-container {
@@ -112,20 +116,28 @@ h1, h2, h3 {
     font-family: var(--font-mono);
     font-weight: 700;
     font-size: 1.2rem;
-    color: var(--text-main);
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.logo:hover {
+    color: var(--accent-color);
 }
 
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 2rem;
+    gap: 2.5rem;
 }
 
 .nav-links a {
     color: var(--text-main);
     text-decoration: none;
-    font-size: 0.9rem;
-    transition: color 0.3s ease;
+    font-size: 0.85rem;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    transition: color 0.2s ease;
 }
 
 .nav-links a:hover {
@@ -143,13 +155,15 @@ h1, h2, h3 {
 #hero h1 {
     font-size: clamp(2.5rem, 5vw, 4.5rem);
     margin-bottom: 0.5rem;
+    letter-spacing: -1px;
 }
 
 #hero h2 {
-    font-size: clamp(1.2rem, 3vw, 2rem);
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
     color: var(--text-muted);
     font-weight: 400;
     margin-bottom: 1.5rem;
+    font-family: var(--font-mono);
 }
 
 .summary {
@@ -163,7 +177,7 @@ h1, h2, h3 {
 .btn-group {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 1.5rem;
 }
 
 .justify-center {
@@ -173,39 +187,41 @@ h1, h2, h3 {
 .btn {
     display: inline-block;
     padding: 0.8rem 1.5rem;
-    border-radius: 4px;
+    border-radius: 0; /* Sharp edges */
     font-family: var(--font-mono);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     text-decoration: none;
-    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.2s ease;
     cursor: pointer;
 }
 
 .btn-small {
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1.2rem;
     font-size: 0.8rem;
 }
 
 .btn-primary {
-    background-color: var(--accent-color);
-    color: var(--bg-main);
-    font-weight: 600;
-    border: 1px solid var(--accent-color);
-}
-
-.btn-primary:hover {
-    background-color: var(--accent-hover);
-    border-color: var(--accent-hover);
-}
-
-.btn-outline {
     background-color: transparent;
     color: var(--accent-color);
     border: 1px solid var(--accent-color);
 }
 
+.btn-primary:hover {
+    background-color: var(--accent-color);
+    color: var(--bg-main);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+}
+
 .btn-outline:hover {
-    background-color: rgba(56, 189, 248, 0.1);
+    border-color: var(--accent-color);
+    color: var(--accent-color);
 }
 
 /* --- About Section --- */
@@ -228,26 +244,28 @@ h1, h2, h3 {
 }
 
 .stat-box {
-    background-color: var(--bg-main);
+    background-color: transparent;
     border: 1px solid var(--border-color);
     padding: 1.5rem;
-    border-radius: 6px;
+    border-left: 3px solid var(--accent-color); /* Cyber accent */
 }
 
 .stat-box h3 {
-    font-size: 1rem;
-    color: var(--accent-color);
+    font-size: 0.85rem;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+    text-transform: uppercase;
     margin-bottom: 0.5rem;
 }
 
 .stat-box p {
-    font-size: 0.9rem;
+    font-size: 1rem;
+    color: #ffffff;
     font-weight: 600;
 }
 
 /* --- Projects Section --- */
 .project-grid {
-    /* Using Flexbox to properly center and bound the single item */
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -257,24 +275,22 @@ h1, h2, h3 {
 .card {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
-    border-radius: 8px;
     display: flex;
     flex-direction: column;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     width: 100%;
-    max-width: 650px; /* Limits width so it doesn't stretch awkwardly */
+    max-width: 700px;
+    transition: border-color 0.2s ease;
 }
 
+/* Removed the bubbly hover float, replaced with sharp border glow */
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     border-color: var(--accent-color);
 }
 
 .card-content {
     padding: 2.5rem;
     flex-grow: 1;
-    text-align: left; /* This fixes the floating bullet point issue */
+    text-align: left;
 }
 
 .card-tag {
@@ -284,12 +300,13 @@ h1, h2, h3 {
     text-transform: uppercase;
     letter-spacing: 1px;
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 .card h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
+    font-family: var(--font-main);
 }
 
 .card p {
@@ -311,7 +328,8 @@ h1, h2, h3 {
 }
 
 .card-list li::before {
-    content: '▹';
+    content: '>';
+    font-family: var(--font-mono);
     position: absolute;
     left: 0;
     color: var(--accent-color);
@@ -333,21 +351,12 @@ h1, h2, h3 {
 }
 
 .skill-category h3 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    font-family: var(--font-mono);
     margin-bottom: 1.5rem;
-    color: var(--text-main);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.skill-category h3::before {
-    content: '';
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    background-color: var(--accent-color);
-    border-radius: 50%;
+    color: #ffffff;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
 }
 
 .skill-list {
@@ -357,17 +366,16 @@ h1, h2, h3 {
 .skill-list li {
     color: var(--text-muted);
     margin-bottom: 0.8rem;
-    font-size: 1rem;
+    font-size: 0.95rem;
     display: flex;
     align-items: center;
 }
 
 .skill-list li::before {
-    content: '>';
+    content: '-';
     font-family: var(--font-mono);
     color: var(--accent-color);
     margin-right: 10px;
-    font-size: 0.8rem;
 }
 
 /* --- Contact Section --- */
@@ -384,8 +392,13 @@ h1, h2, h3 {
 }
 
 .contact-info a {
-    color: var(--accent-color);
+    color: #ffffff;
     text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.contact-info a:hover {
+    color: var(--accent-color);
 }
 
 /* --- Footer --- */
@@ -395,19 +408,19 @@ footer {
     border-top: 1px solid var(--border-color);
     color: var(--text-muted);
     font-family: var(--font-mono);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
 }
 
 /* --- Animations --- */
 .hidden {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    /* Removed the translateY to make the appearance instant and rigid, less "floaty" */
+    transition: opacity 0.4s ease-in;
 }
 
 .fade-in {
     opacity: 1;
-    transform: translateY(0);
 }
 
 /* --- Media Queries --- */
@@ -427,7 +440,7 @@ footer {
 
 @media (max-width: 768px) {
     .nav-links {
-        display: none; /* Mobile menu placeholder */
+        display: none;
     }
     #hero h1 {
         font-size: 2.5rem;
