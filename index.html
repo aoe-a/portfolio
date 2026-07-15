@@ -26,6 +26,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <noscript><style>.loader{display:none}</style></noscript>
 <style>
+/* Hallmark · audit-fix · genre: atmospheric · macrostructure: Long Document (editorial rows)
+ * theme: monochrome (near-black paper · neutral · Space Grotesk + JetBrains Mono)
+ * pre-emit critique: P5 H4 E4 S5 R4 V4
+ * removed tells: floating-orb decoration · numbered eyebrow on every section · transition:all
+ */
 :root{
   --bg:#050505;
   --panel:#0c0c0c;
@@ -69,33 +74,23 @@ body::before{
 /* ---------- ambient background lights ---------- */
 .bg-lights{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .bg-lights i{display:block;position:absolute}
-.orb{
-  border-radius:50%;
-  background:radial-gradient(circle,rgba(255,255,255,.13),transparent 62%);
-}
-.bg-lights i:nth-child(1){width:540px;height:540px;top:-12%;left:-10%;animation:drift-a 26s ease-in-out infinite alternate}
-.bg-lights i:nth-child(2){width:440px;height:440px;top:46%;right:-12%;animation:drift-b 34s ease-in-out infinite alternate}
-.bg-lights i:nth-child(3){width:340px;height:340px;bottom:-10%;left:32%;animation:drift-c 22s ease-in-out infinite alternate}
-@keyframes drift-a{to{transform:translate(16vw,24vh) scale(1.15)}}
-@keyframes drift-b{to{transform:translate(-18vw,-16vh) scale(.92)}}
-@keyframes drift-c{to{transform:translate(-14vw,-22vh) scale(1.18)}}
 
-/* light pulses travelling along the grid lines (56px spacing) */
+/* light pulses travelling the grid lines (56px spacing) — reads as data-flow, on-brand for SIEM */
 .pulse{
   top:0;width:1px;height:150px;
-  background:linear-gradient(180deg,transparent,rgba(255,255,255,.65),transparent);
+  background:linear-gradient(180deg,transparent,rgba(255,255,255,.6),transparent);
   animation:fall 9s linear infinite;
 }
 .pulse.h{
   left:0;width:150px;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.65),transparent);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);
   animation:slide 13s linear infinite;
 }
-.bg-lights i:nth-child(4){left:112px;animation-duration:8s}
-.bg-lights i:nth-child(5){left:392px;animation-duration:12s;animation-delay:4s}
-.bg-lights i:nth-child(6){left:784px;animation-duration:10s;animation-delay:7s}
-.bg-lights i:nth-child(7){top:224px;animation-duration:14s;animation-delay:2s}
-.bg-lights i:nth-child(8){top:504px;animation-duration:11s;animation-delay:8s}
+.bg-lights i:nth-child(1){left:112px;animation-duration:8s}
+.bg-lights i:nth-child(2){left:392px;animation-duration:12s;animation-delay:4s}
+.bg-lights i:nth-child(3){left:784px;animation-duration:10s;animation-delay:7s}
+.bg-lights i:nth-child(4){top:224px;animation-duration:14s;animation-delay:2s}
+.bg-lights i:nth-child(5){top:504px;animation-duration:11s;animation-delay:8s}
 @keyframes fall{from{transform:translateY(-160px)}to{transform:translateY(110vh)}}
 @keyframes slide{from{transform:translateX(-160px)}to{transform:translateX(110vw)}}
 
@@ -162,11 +157,6 @@ nav{
 /* ---------- layout ---------- */
 main{position:relative;z-index:1}
 section{max-width:1080px;margin:0 auto;padding:clamp(72px,10vw,120px) clamp(20px,5vw,40px)}
-.eyebrow{
-  font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:2px;
-  text-transform:uppercase;display:flex;align-items:center;gap:12px;margin-bottom:20px;
-}
-.eyebrow::after{content:"";height:1px;flex:1;background:var(--line)}
 h2{font-size:clamp(32px,5vw,58px);font-weight:700;letter-spacing:-.035em;line-height:1.08;margin-bottom:16px}
 section[id]{scroll-margin-top:80px}
 /* editorial watermark section numbers */
@@ -245,7 +235,8 @@ body.cursor-on .cursor-ring{opacity:1}
 .btn-row{display:flex;gap:14px;flex-wrap:wrap}
 .btn{
   font-family:var(--mono);font-size:13px;letter-spacing:.5px;text-decoration:none;
-  padding:13px 26px;border:1px solid var(--txt);transition:all .25s var(--ease);
+  padding:13px 26px;border:1px solid var(--txt);
+  transition:background-color .25s var(--ease),color .25s var(--ease),border-color .25s var(--ease),transform .12s var(--ease);
   cursor:pointer;touch-action:manipulation;will-change:transform;
 }
 .btn:active{transform:scale(.97)!important}
@@ -302,7 +293,8 @@ body.cursor-on .cursor-ring{opacity:1}
 .tags{display:flex;flex-wrap:wrap;gap:8px}
 .tag{
   font-family:var(--mono);font-size:11px;color:var(--dim);
-  border:1px solid var(--line);padding:4px 10px;transition:all var(--dur-fast);
+  border:1px solid var(--line);padding:4px 10px;
+  transition:border-color var(--dur-fast) var(--ease),color var(--dur-fast) var(--ease);
 }
 .proj:hover .tag{border-color:#666;color:var(--txt)}
 .card-link{font-family:var(--mono);font-size:13px;color:var(--txt);text-decoration:none;margin-top:6px}
@@ -324,7 +316,8 @@ body.cursor-on .cursor-ring{opacity:1}
 /* ---------- certs ---------- */
 .cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
 .cert{
-  border:1px solid var(--line);padding:20px;transition:all .25s;background:var(--panel);
+  border:1px solid var(--line);padding:20px;background:var(--panel);
+  transition:border-color .25s var(--ease),transform .25s var(--ease);
 }
 .cert:hover{border-color:#fff;transform:translateY(-3px)}
 .cert span{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:6px}
@@ -333,8 +326,6 @@ body.cursor-on .cursor-ring{opacity:1}
 /* ---------- contact: inverted block ---------- */
 .contact{max-width:none;padding:0;text-align:center;background:#f0f0f0;color:#050505}
 .contact-inner{max-width:1080px;margin:0 auto;padding:clamp(88px,12vw,150px) clamp(20px,5vw,40px)}
-.contact .eyebrow{color:#555}
-.contact .eyebrow::after{background:#c9c9c9}
 .contact h2{font-size:clamp(44px,8vw,112px);letter-spacing:-.045em;line-height:.98}
 .contact .email{
   font-family:var(--mono);font-size:clamp(15px,2.5vw,20px);color:#444;
@@ -362,7 +353,6 @@ footer .online i{width:6px;height:6px;border-radius:50%;background:#fff;animatio
 .reveal{opacity:0;transform:translateY(30px);transition:opacity var(--dur-slow) ease,transform var(--dur-slow) var(--ease)}
 .reveal-left{transform:translateX(-48px)}
 .reveal-right{transform:translateX(48px)}
-.reveal-scale{transform:translateY(24px) scale(.94)}
 .reveal.show{opacity:1;transform:none}
 
 /* ---------- responsive ---------- */
@@ -405,7 +395,6 @@ a:focus-visible,button:focus-visible{outline:2px solid #fff;outline-offset:3px}
 <div class="scanline" aria-hidden="true"></div>
 <div class="progress" id="progress" aria-hidden="true"></div>
 <div class="bg-lights" aria-hidden="true">
-  <i class="orb"></i><i class="orb"></i><i class="orb"></i>
   <i class="pulse"></i><i class="pulse"></i><i class="pulse"></i>
   <i class="pulse h"></i><i class="pulse h"></i>
   <i class="spotlight"></i>
@@ -443,7 +432,6 @@ a:focus-visible,button:focus-visible{outline:2px solid #fff;outline-offset:3px}
 
 <!-- ABOUT -->
 <section id="about" data-num="01">
-  <p class="eyebrow reveal">01 // Profile</p>
   <h2 class="reveal">About Me</h2>
   <div class="about-grid">
     <div class="about-text reveal reveal-left">
@@ -464,7 +452,6 @@ a:focus-visible,button:focus-visible{outline:2px solid #fff;outline-offset:3px}
 
 <!-- PROJECTS -->
 <section id="projects" data-num="02">
-  <p class="eyebrow reveal">02 // Build Log</p>
   <h2 class="reveal">Projects</h2>
   <p class="sub reveal">Hands-on work that turns security theory into functioning tools and analysis.</p>
   <div class="proj-list">
@@ -514,7 +501,6 @@ a:focus-visible,button:focus-visible{outline:2px solid #fff;outline-offset:3px}
 
 <!-- SKILLS -->
 <section id="skills" data-num="03">
-  <p class="eyebrow reveal">03 // Capabilities</p>
   <h2 class="reveal">Technical Competencies</h2>
   <div class="grid-3">
     <div class="skill-col reveal reveal-left">
@@ -552,7 +538,6 @@ a:focus-visible,button:focus-visible{outline:2px solid #fff;outline-offset:3px}
 
 <!-- CERTS -->
 <section id="certs" data-num="04">
-  <p class="eyebrow reveal">04 // Credentials</p>
   <h2 class="reveal">Certifications</h2>
   <div class="cert-grid">
     <div class="cert reveal"><span>EC-Council</span><b>Ethical Hacking Essentials (EHE)</b></div>
@@ -569,7 +554,6 @@ a:focus-visible,button:focus-visible{outline:2px solid #fff;outline-offset:3px}
 <!-- CONTACT -->
 <section id="contact" class="contact">
   <div class="contact-inner">
-    <p class="eyebrow reveal" style="justify-content:center">05 // Establish Connection</p>
     <h2 class="reveal">Let's build<br>something secure.</h2>
     <a class="email reveal" href="mailto:aoe.alblooshi@hotmail.com">aoe.alblooshi@hotmail.com</a>
     <div class="btn-row reveal" style="justify-content:center">
